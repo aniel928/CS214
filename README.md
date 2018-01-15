@@ -1,5 +1,5 @@
 #CS214 Projects#
-Projects are all coded in pure C.
+Projects are all coded in pure C.  I was not yet saving my code to Bitbucket, so there is no real commit history here.  For examples of what my commit history normally looks like, please see CS416 repository.
 
 ##Asst0##
 String Parsing.
