@@ -1,0 +1,55 @@
+Jason Kwak
+Anne Whitman
+
+Test Cases:
+
+Input: ./pointersorter 
+Expected Output:
+Incorrect number of parameters.
+
+Input: ./pointersorter “Hello” “Hello”
+Expected Output:
+Incorrect number of parameters.
+
+Input: ./pointersorter “”
+Expected Output: <none>
+
+Input: ./pointersorter “Hello”
+Expected Output:
+Hello
+
+Input:  ./pointersorter “test TEST testing TESTING”
+Expected Output: 
+TEST
+TESTING
+test
+testing
+
+Input: ./pointersorter “test1TEST(testing;TESTING”
+Expected Output:
+TEST
+TESTING
+test
+testing
+
+Input: ./pointersorter “Aaaa&aAaa*aaAa?aaaA”
+Expected Output:
+Aaaa
+aAaa
+aaAa
+aaaA
+
+Input: 
+./pointersorter “888888888888888”
+Expected Output: <none>
+
+Input: ./pointersorter “Good12Morning”
+Expected Output:
+Good
+Morning
+
+Input:./pointersorter “I-like&Hot dogs”Expected Output:
+HotIdogslikeInput:/.pointersorter “z@a%Z)A9”Expected Output:
+AZazInput:./pointersorter “anY answers added As aGreeable are alright.”Expected Output:
+AsaGreeableaddedalrightanYanswersare
+

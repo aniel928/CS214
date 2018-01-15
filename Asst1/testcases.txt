@@ -1,0 +1,77 @@
+
+Main two test cases:
+In the beginning we were having a lot of issues with malloc()ing and free()ing repeated numbers, so we wanted to stress test doing that by generating random numbers.  We have two different tests, one that test out the same random number each time, and one that changes the random number repeatedly.
+
+void test(E); - malloc( ) and free() the same random number repeatedly 100 times.void test(F); - malloc( ) and free() different random numbers repeatedly 100 times.
+
+
+Other Test Cases:
+
+char* test = (char*)malloc(10000);
+EXPECTED OUT: 	"Not enough memory available to allocate <BYTES RQSTD> bytes. File: <__FILE__>, Line: <__LINE__>”
+
+char* a = malloc(0);
+EXPECTED OUT: 	"No bytes requested, file: <__FILE__>, line:  <__LINE__>”
+
+int x;
+free (&x);
+EXPECTED OUT: 	"Not dynamically allocated, file: <__FILE__>, line: <__LINE__>”	
+				—OR—
+		"Not a pointer or not dynamically allocated, file: <__FILE__>, line <__LINE__>.\n”
+
+char *p;
+p = (char*)malloc(200);
+free(p+10);
+EXPECTED OUT:	"Not a pointer or not dynamically allocated, file: <__FILE__>, line <__LINE__>.\n”
+	
+	
+int *y;
+free(y);
+EXPECTED OUT: 	"Not dynamically allocated, file: <__FILE__>, line: <__LINE__>”	
+				—OR—
+		"Not a pointer or not dynamically allocated, file: <__FILE__>, line <__LINE__>.\n” 
+
+char *q;
+q=(char*)malloc(100);
+free(q);
+free(q);
+EXPECTED OUT: 	success on first, on second “Not a pointer or not dynamically allocated, file: <__FILE__>, line <__LINE__>.\n”
+	
+char* r = (char*)malloc(100);
+printf("1: %p\n",r);
+free(r);
+r = (char*)malloc(100);
+printf("2: %p\n",r);
+free(r);	
+EXPECTED OUT: success, and should use same address.		
+
+
+DETAILED TEST:	
+char * no1 = malloc(1);
+char * no3 = malloc(3);
+char * no4 = malloc(4);
+printf("\n\n");
+	
+free(no3);
+
+printf("%d\n",((metadata*)(no1 - sizeof(metadata)))->size);
+printf("%p\n",(metadata*)(no1));
+printf("%d\n",((metadata*)(no3 - sizeof(metadata)))->size);
+printf("%p\n",(metadata*)(no3));
+printf("%d\n",((metadata*)(no4 - sizeof(metadata)))->size);
+printf("%p\n",(metadata*)(no4));
+
+printf("\n\n");
+char * no10 = malloc(2);
+
+printf("%d\n",((metadata*)(no1 - sizeof(metadata)))->size);
+printf("%p\n",(metadata*)(no1));
+printf("%d\n",((metadata*)(no3 - sizeof(metadata)))->size);
+printf("%p\n",(metadata*)(no3));
+printf("%d\n",((metadata*)(no4 - sizeof(metadata)))->size);
+printf("%p\n",(metadata*)(no4));
+printf("%d\n",((metadata*)(no10 - sizeof(metadata)))->size);
+printf("%p\n",(metadata*)(no10));
+*/
+
+EXPECTED OUT:  no3 and no10 should share size and address.  

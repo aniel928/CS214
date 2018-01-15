@@ -1,0 +1,2284 @@
+Michael Mazzola
+Anne Whitman
+
+Test Cases (10 total):
+
+TEST ONE: Test a file nested under 11 directories (first one doesn’t count because we’re referencing it by second) by giving topmost directory.
+
+E.g.:  ./Testcases/Test1/Next/New folder/New folder/New folder/New folder/New folder/New folder/New folder/New folder/New folder/THEfile.txt
+
+command line input ->./invertedIndex index ./TestCases/Test1
+
+file data:  
+	ZOOOLOGIST zebra 123zed
+	**324
+	KiteFlyingCatWithAShoeLace 23423apple 993austrailia arnold acorn amp
+
+Expected Output: 
+	Command Line: 11 directories, 1 files, and 9 words indexed.  Output can be found at ./index.
+	XML File: 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+	        <word text="acorn">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="amp">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="apple">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="arnold">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="austrailia">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="kiteflyingcatwithashoelace">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="zebra">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="zed">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	        <word text="zooologist">
+	                <file name="thefile.txt">1</file>
+	        </word>
+	</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST TWO: One directory with 6 files and a directory that holds the same 6 files (recursively for a total of 9 directories).
+
+E.g. ./TestCases/Test2/... 
+	|->File1.txt
+	|->File2.txt
+	....		
+	|->File6.txt
+	|->FOLDER1
+	   |->File1.txt
+	   ...
+	...
+
+command line input ->./invertedIndex index ./TestCases/Test2
+
+file data:  
+	
+File1.txt:	FILE
+File2.txt:	FILER
+File3.txt:	FILERIO
+File4.txt:	FILERIUM
+File5.txt:	FILERIOLIUM
+File6.txt:	FILL
+
+(same for all directories)
+
+Expected Output: 
+	Command Line: 9 directories, 54 files, and 54 words indexed.  Output can be found at ./index.
+	XML File: 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+	        <word text="file">
+	                <file name="file1.txt">9</file>
+	        </word>
+	        <word text="filer">
+	                <file name="file2.txt">9</file>
+	        </word>
+	        <word text="filerio">
+	                <file name="file3.txt">9</file>
+	        </word>
+	        <word text="fileriolium">
+	                <file name="file5.txt">9</file>
+	        </word>
+	        <word text="filerium">
+	                <file name="file4.txt">9</file>
+	        </word>
+	        <word text="fill">
+	                <file name="file6.txt">9</file>
+	        </word>
+	</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST THREE: One directory with 7 ”alphabet” files, all of which contain words that are separated almost every letter by punctuation. (Mainly to test wordCtr sort.)
+
+E.g. ./TestCases/Test3/... 
+	|->F1.txt
+	|->F2.txt
+	....		
+	|->F7.txt
+
+command line input ->./invertedIndex index ./TestCases/Test3
+
+file data:  
+	
+F1.txt:	t!h!e! e!x!p!l!o!r!e!r! !w!a!s! !f!r!o!z!e!n !i!n h!i!s! b!i!g! !k!a!y!a!k! !j!u!s!t! !a!f!t!e!r! m!a!k!i!n!g! q!u!e!e!r! !d!i!s!c!o!v!e!r!i!e!s! 
+F2.txt:	S!i!x! j!a!v!e!l!i!n!s! t!h!r!o!w!n! b!y t!h!e !q!u!i!c!k! !s!a!v!a!g!e!s! w!h!i!z!z!e!d! f!o!r!t!y! !p!a!c!e!s! !b!e!y!o!n!d! !t!h!e! !m!a!r!k!
+F3.txt:	C@W*M* F(J$]O-R-D ^B%A#N!K G)L;P*H)S V#E@X!T Q]U[I{Z
+F4.txt:	Q U A R T Z  g l y p h    J O C K S    v e n d , F I X , b m w
+F5.txt:	V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+V E L D T  J Y N X  G R I M P S  W A Q F  Z H O  B U C K
+
+F6.txt:	X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+X C  F  J O  R D n  y m  p h  s b e  g q u  i c  k w a  l t  z
+
+F7.txt: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+
+
+Expected Output: 
+	Command Line: 1 directories, 7 files, and 1553 words indexed.  Output can be found at ./index.
+	XML File: 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<fileIndex>
+	<word text="a">
+		<file name="f7.txt">25</file>
+		<file name="f5.txt">14</file>
+		<file name="f6.txt">13</file>
+		<file name="f1.txt">5</file>
+		<file name="f2.txt">4</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="aq">
+		<file name="f5.txt">1</file>
+	</word>
+	<word text="b">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">14</file>
+		<file name="f2.txt">2</file>
+		<file name="f1.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="c">
+		<file name="f6.txt">29</file>
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">14</file>
+		<file name="f2.txt">2</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="cb">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="d">
+		<file name="f7.txt">25</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">13</file>
+		<file name="f1.txt">1</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="dn">
+		<file name="f6.txt">1</file>
+	</word>
+	<word text="e">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">7</file>
+		<file name="f2.txt">6</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="f">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">2</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="fe">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="g">
+		<file name="f7.txt">25</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">2</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="h">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">14</file>
+		<file name="f2.txt">3</file>
+		<file name="f1.txt">2</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="i">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">13</file>
+		<file name="f1.txt">4</file>
+		<file name="f2.txt">4</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="ih">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="j">
+		<file name="f7.txt">25</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">13</file>
+		<file name="f1.txt">1</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="k">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">3</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="l">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">1</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="lk">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="m">
+		<file name="f7.txt">25</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="n">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">13</file>
+		<file name="f1.txt">3</file>
+		<file name="f2.txt">3</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="o">
+		<file name="f7.txt">23</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">14</file>
+		<file name="f2.txt">3</file>
+		<file name="f1.txt">2</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="on">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="p">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">1</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="q">
+		<file name="f7.txt">23</file>
+		<file name="f5.txt">14</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">1</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="r">
+		<file name="f7.txt">23</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">5</file>
+		<file name="f2.txt">2</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="rq">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="s">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">14</file>
+		<file name="f2.txt">5</file>
+		<file name="f1.txt">3</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="t">
+		<file name="f7.txt">23</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">3</file>
+		<file name="f2.txt">3</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="u">
+		<file name="f7.txt">23</file>
+		<file name="f5.txt">14</file>
+		<file name="f6.txt">14</file>
+		<file name="f1.txt">2</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="uc">
+		<file name="f5.txt">1</file>
+	</word>
+	<word text="ut">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="v">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">16</file>
+		<file name="f2.txt">2</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="w">
+		<file name="f7.txt">23</file>
+		<file name="f5.txt">15</file>
+		<file name="f6.txt">13</file>
+		<file name="f2.txt">2</file>
+		<file name="f1.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="wa">
+		<file name="f6.txt">1</file>
+	</word>
+	<word text="x">
+		<file name="f7.txt">23</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">15</file>
+		<file name="f1.txt">1</file>
+		<file name="f2.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="xw">
+		<file name="f7.txt">1</file>
+	</word>
+	<word text="y">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">16</file>
+		<file name="f6.txt">14</file>
+		<file name="f2.txt">3</file>
+		<file name="f1.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+	<word text="z">
+		<file name="f7.txt">24</file>
+		<file name="f5.txt">14</file>
+		<file name="f6.txt">14</file>
+		<file name="f2.txt">2</file>
+		<file name="f1.txt">1</file>
+		<file name="f3.txt">1</file>
+		<file name="f4.txt">1</file>
+	</word>
+</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST FOUR: One directory with 5 subdirectories, all of which have between 1-4 more subdirectories, at the end of the line there are files.  All files and directories have the same name within their hierarchy and inside the file is the same word as the previous files/directories are named.
+
+E.g. ./TestCases/Test4/... 
+	|->This
+	   ...
+	   This.txt
+	|->Is
+	   ...
+	   Is.txt
+	|->A		
+	   ...
+	   A.txt
+	|->Test
+	   ...
+	   Test.txt
+	|->Case
+	   ...
+	   Case.txt
+
+command line input ->./invertedIndex index ./TestCases/Test4
+
+file data:  
+	
+This.txt:	This	
+Is.txt:		Is
+A.txt:		A
+Test.txt:	Test
+Case.txt:	Case
+
+
+Expected Output: 
+	Command Line: 15 directories, 5 files, and 5 words indexed.  Output can be found at ./index.
+	XML File: 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+	        <word text="a">
+	                <file name="a.txt">1</file>
+	        </word>
+	        <word text="case">
+	                <file name="case.txt">1</file>
+	        </word>
+	        <word text="is">
+	                <file name="is.txt">1</file>
+	        </word>
+	        <word text="test">
+	                <file name="test.txt">1</file>
+	        </word>
+	        <word text="this">
+	                <file name="this.txt">1</file>
+	        </word>
+	</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST FIVE: A text file (not a directory) that holds a long string beginning with many characters.  Particuarly, more than the buffer will hold with one word at the end.
+
+E.g. ./TestCases/Test5.txt
+
+command line input ->./invertedIndex index ./TestCases/Test5.txt
+
+file data:  	
+Test5.txt:  !@#$%^&*()_+=-‘;,./?><:”|}{[]!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\!@#$%^&*()_+=-‘;,./?><:”|}{[]\\hi
+
+
+Expected Output: 
+	Command Line: 0 directories, 1 files, and 1 words indexed.  Output can be found at ./index.at ./index.
+	XML File: 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+	        <word text="hi">
+	                <file name="testcases/test5.txt">1</file>
+	        </word>
+	</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST SIX: One directory with one fairly large (large enough to test the buffer) file with an excerpt from a textbook on data structures.
+
+E.g. ./TestCases/Test6/textbook.txt
+
+command line input ->./invertedIndex index ./TestCases/Test6.txt
+
+file data:  	
+Input/Output
+It is difficult to know what background the students using a data structures textbook
+will have in Java I/O. Some may have learned Java in an environment where the
+Java input/output statements were ìhiddenî behind a package provided with their
+introductory textbook. Others may have learned graphical input/output techniques,
+but never learned how to do file input/output. Some have learned how to create
+graphical interfaces using the Java AWT; others have learned Swing; others have
+learned neither. To allow all the students using our textbook to concentrate on the
+primary topic of data structures, we use the simplest I/O approach we can, namely
+console I/O. For input we use the Scanner class, a class introduced in Java 5.0 that
+greatly simplifies the input task. Output is accomplished using the simple
+System.out.print command.
+To support those teachers and students who prefer to work with graphical user
+interfaces (GUIs), we provide GUIs for many of our case studies (in addition to the console-
+based solutions). In this way they have a code base to support instruction and additional
+work using GUIs. At the conclusion of each case study we discuss the GUI-based
+solution, include some screenshots of the program in action, and provide some related
+exercises.
+Content and Organization
+Chapter 1 is all about Getting Organized. It introduces ways of organizing software
+development and software solutions. An overview of object orientation stresses mechanisms
+for organizing objects and classes of objects. Our primary topic of data structures
+starts with a look at the classic structures and the two fundamental language constructs
+that are used to implement those structures: the array and the reference (link/pointer).
+The chapter concludes with a study of Big-O analysisóhow we evaluate algorithms that
+provide access to, or otherwise use, our data structures.
+Chapter 2 introduces Abstract Data Types (ADTs). We view data from three different
+levels: the logical, application, and implementation levels. We introduce the Java
+interface mechanism as a means of supporting this three-tiered view. As a simple example
+of an ADT we present a collection of strings and show how it is handled at each of
+the three levels. For the implementation level we include both array-based and reference-
+based approaches. To support the reference-based approach we introduce the
+linked list structure. We also address ways of verifying the correctness of our work.
+Finally, in a case study, we see how the use of abstraction simplifies the task of implementing
+a trivia game system.
+Chapter 3 presents The Stack ADT. The stack is first considered from its abstract
+perspective, and the idea of recording the logical abstraction in an ADT specification as
+a Java interface is reinforced. Sub-interfacing allows us to define both bounded and
+unbounded stack abstractions. We investigate the kinds of elements we
+
+
+Expected Output: 
+	Command Line: 1 directories, 1 files, and 468 words indexed.  Output can be found at ./index.
+	XML File: 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+		<word text="a">
+			<file name="textbook.txt">11</file>
+		</word>
+		<word text="about">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="abstract">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="abstraction">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="abstractions">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="access">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="accomplished">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="action">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="addition">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="additional">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="address">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="adt">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="adts">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="algorithms">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="all">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="allow">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="allows">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="also">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="an">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="analysis">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="and">
+			<file name="textbook.txt">13</file>
+		</word>
+		<word text="application">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="approach">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="approaches">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="are">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="array">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="as">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="astudy">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="at">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="awt">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="background">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="base">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="based">
+			<file name="textbook.txt">5</file>
+		</word>
+		<word text="behind">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="big">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="both">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="bounded">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="but">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="can">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="case">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="chapter">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="class">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="classes">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="classic">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="code">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="collection">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="command">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="concentrate">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="concludes">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="conclusion">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="considered">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="console">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="constructs">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="content">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="correctness">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="create">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="data">
+			<file name="textbook.txt">6</file>
+		</word>
+		<word text="define">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="development">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="different">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="difficult">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="discuss">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="do">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="each">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="elements">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="environment">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="evaluate">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="example">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="exercises">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="file">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="finally">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="first">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="for">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="from">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="fundamental">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="game">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="getting">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="graphical">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="greatly">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="gui">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="guis">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="handled">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="have">
+			<file name="textbook.txt">6</file>
+		</word>
+		<word text="havelearned">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="hidden">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="how">
+			<file name="textbook.txt">5</file>
+		</word>
+		<word text="i">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="idea">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="implement">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="implementation">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="implementing">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="in">
+			<file name="textbook.txt">8</file>
+		</word>
+		<word text="include">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="input">
+			<file name="textbook.txt">6</file>
+		</word>
+		<word text="instruction">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="interface">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="interfaces">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="interfacing">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="introduce">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="introduced">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="introduces">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="introductory">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="investigate">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="is">
+			<file name="textbook.txt">5</file>
+		</word>
+		<word text="it">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="its">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="java">
+			<file name="textbook.txt">7</file>
+		</word>
+		<word text="kinds">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="know">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="language">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="learned">
+			<file name="textbook.txt">5</file>
+		</word>
+		<word text="level">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="levels">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="link">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="linked">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="list">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="logical">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="look">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="many">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="may">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="means">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="mechanism">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="mechanisms">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="namely">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="neither">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="never">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="o">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="object">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="objects">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="of">
+			<file name="textbook.txt">19</file>
+		</word>
+		<word text="on">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="or">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="organization">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="organized">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="organizing">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="orientation">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="others">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="otherwise">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="our">
+			<file name="textbook.txt">5</file>
+		</word>
+		<word text="out">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="output">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="outputis">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="overview">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="package">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="perspective">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="pointer">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="prefer">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="present">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="presents">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="primary">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="print">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="program">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="provide">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="provided">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="recording">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="reference">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="reinforced">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="related">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="scanner">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="screenshots">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="see">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="show">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="simple">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="simplest">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="simplifies">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="software">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="solution">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="solutions">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="some">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="specification">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="stack">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="starts">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="statements">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="stresses">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="strings">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="structure">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="structures">
+			<file name="textbook.txt">6</file>
+		</word>
+		<word text="students">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="studentswho">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="studies">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="study">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="sub">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="support">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="supporting">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="swing">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="system">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="task">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="teachers">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="techniques">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="textbook">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="that">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="the">
+			<file name="textbook.txt">32</file>
+		</word>
+		<word text="their">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="they">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="this">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="those">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="three">
+			<file name="textbook.txt">3</file>
+		</word>
+		<word text="tiered">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="to">
+			<file name="textbook.txt">13</file>
+		</word>
+		<word text="topic">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="trivia">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="two">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="types">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="unbounded">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="us">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="use">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="used">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="user">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="using">
+			<file name="textbook.txt">5</file>
+		</word>
+		<word text="verifying">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="view">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="way">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="ways">
+			<file name="textbook.txt">2</file>
+		</word>
+		<word text="we">
+			<file name="textbook.txt">15</file>
+		</word>
+		<word text="were">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="what">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="where">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="will">
+			<file name="textbook.txt">1</file>
+		</word>
+		<word text="with">
+			<file name="textbook.txt">4</file>
+		</word>
+		<word text="work">
+			<file name="textbook.txt">3</file>
+		</word>
+</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST SEVEN: empty directory with no files to index.
+
+E.g. ./TestCases/Test7/<empty>
+
+command line input ->./invertedIndex index ./TestCases/Test7
+
+file data:  No Files Exist
+	
+Expected Output: 
+	Command Line: 1 directories, 0 files, and 0 words indexed.  Output can be found at ./index.
+	XML File: 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+	</fileIndex>       
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST EIGHT: a text file (not a directory) that contains a web address for a google search copied a few times with jibberish in between.  
+
+E.g. ./TestCases/Test8.txt
+
+command line input ->./invertedIndex index ./TestCases/Test8.txt
+
+file data:  
+
+https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googlinggooglesearch&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8 jdsfkjaslfjas fsflskfjl sflsa fjlsak flksafj lskfj lksjaf;laskjfd ;laskfj las;kfj slkfj lskfj alk;sfj l;askdfj lskdfj ldaskfj lakdsfj ;laksdfjl ;asdjf;lk asjd;lfkjas dlfkj asd;lkfj asd;lkfjasl kfj lk230492i 09i09fi askfjalskf;j ;aslkf https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googlinggooglesearch&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8 jdsfkjaslfjas fsflskfjl sflsa fjlsak flksafj lskfj lksjaf;laskjfd ;laskfj las;kfj slkfj lskfj alk;sfj l;askdfj lskdfj ldaskfj lakdsfj ;laksdfjl ;asdjf;lk asjd;lfkjas dlfkj asd;lkfj asd;lkfjasl kfj lk230492i 09i09fi askfjalskf;j ;aslkf https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googlinggooglesearch&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8 jdsfkjaslfjas fsflskfjl sflsa fjlsak flksafj lskfj lksjaf;laskjfd ;laskfj las;kfj slkfj lskfj alk;sfj l;askdfj lskdfj ldaskfj lakdsfj ;laksdfjl ;asdjf;lk asjd;lfkjas dlfkj asd;lkfj asd;lkfjasl kfj lk230492i 09i09fi askfjalskf;j ;aslkf https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googling+google+search&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8https://www.google.com/search?q=google+search+a+google+search+while+googling+google+search&rlz=1C1EJFA_enUS676US676&oq=google+search+a+google+search+while+googlinggooglesearch&aqs=chrome..69i57j69i64.8161j0j7&sourceid=chrome&ie=UTF-8 jdsfkjaslfjas fsflskfjl sflsa fjlsak flksafj lskfj lksjaf;laskjfd ;laskfj las;kfj slkfj lskfj alk;sfj l;askdfj lskdfj ldaskfj lakdsfj ;laksdfjl ;asdjf;lk asjd;lfkjas dlfkj asd;lkfj asd;lkfjasl kfj lk230492i 09i09fi askfjalskf;j ;aslkf 
+	
+
+Expected Output: 
+
+Command Line: 0 directories, 1 files, and 560 words indexed.  Output can be found at ./index.
+
+XML File: 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<fileIndex>
+	<word text="a">
+		<file name="textbook.txt">11</file>
+	</word>
+	<word text="about">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="abstract">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="abstraction">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="abstractions">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="access">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="accomplished">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="action">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="addition">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="additional">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="address">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="adt">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="adts">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="algorithms">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="all">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="allow">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="allows">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="also">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="an">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="analysis">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="and">
+		<file name="textbook.txt">13</file>
+	</word>
+	<word text="application">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="approach">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="approaches">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="are">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="array">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="as">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="astudy">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="at">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="awt">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="background">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="base">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="based">
+		<file name="textbook.txt">5</file>
+	</word>
+	<word text="behind">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="big">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="both">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="bounded">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="but">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="can">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="case">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="chapter">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="class">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="classes">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="classic">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="code">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="collection">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="command">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="concentrate">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="concludes">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="conclusion">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="considered">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="console">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="constructs">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="content">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="correctness">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="create">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="data">
+		<file name="textbook.txt">6</file>
+	</word>
+	<word text="define">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="development">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="different">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="difficult">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="discuss">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="do">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="each">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="elements">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="environment">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="evaluate">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="example">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="exercises">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="file">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="finally">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="first">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="for">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="from">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="fundamental">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="game">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="getting">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="graphical">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="greatly">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="gui">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="guis">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="handled">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="have">
+		<file name="textbook.txt">6</file>
+	</word>
+	<word text="havelearned">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="hidden">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="how">
+		<file name="textbook.txt">5</file>
+	</word>
+	<word text="i">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="idea">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="implement">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="implementation">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="implementing">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="in">
+		<file name="textbook.txt">8</file>
+	</word>
+	<word text="include">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="input">
+		<file name="textbook.txt">6</file>
+	</word>
+	<word text="instruction">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="interface">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="interfaces">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="interfacing">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="introduce">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="introduced">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="introduces">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="introductory">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="investigate">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="is">
+		<file name="textbook.txt">5</file>
+	</word>
+	<word text="it">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="its">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="java">
+		<file name="textbook.txt">7</file>
+	</word>
+	<word text="kinds">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="know">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="language">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="learned">
+		<file name="textbook.txt">5</file>
+	</word>
+	<word text="level">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="levels">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="link">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="linked">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="list">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="logical">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="look">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="many">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="may">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="means">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="mechanism">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="mechanisms">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="namely">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="neither">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="never">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="o">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="object">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="objects">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="of">
+		<file name="textbook.txt">19</file>
+	</word>
+	<word text="on">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="or">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="organization">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="organized">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="organizing">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="orientation">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="others">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="otherwise">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="our">
+		<file name="textbook.txt">5</file>
+	</word>
+	<word text="out">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="output">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="outputis">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="overview">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="package">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="perspective">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="pointer">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="prefer">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="present">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="presents">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="primary">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="print">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="program">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="provide">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="provided">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="recording">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="reference">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="reinforced">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="related">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="scanner">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="screenshots">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="see">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="show">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="simple">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="simplest">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="simplifies">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="software">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="solution">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="solutions">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="some">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="specification">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="stack">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="starts">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="statements">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="stresses">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="strings">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="structure">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="structures">
+		<file name="textbook.txt">6</file>
+	</word>
+	<word text="students">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="studentswho">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="studies">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="study">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="sub">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="support">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="supporting">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="swing">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="system">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="task">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="teachers">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="techniques">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="textbook">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="that">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="the">
+		<file name="textbook.txt">32</file>
+	</word>
+	<word text="their">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="they">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="this">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="those">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="three">
+		<file name="textbook.txt">3</file>
+	</word>
+	<word text="tiered">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="to">
+		<file name="textbook.txt">13</file>
+	</word>
+	<word text="topic">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="trivia">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="two">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="types">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="unbounded">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="us">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="use">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="used">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="user">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="using">
+		<file name="textbook.txt">5</file>
+	</word>
+	<word text="verifying">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="view">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="way">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="ways">
+		<file name="textbook.txt">2</file>
+	</word>
+	<word text="we">
+		<file name="textbook.txt">15</file>
+	</word>
+	<word text="were">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="what">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="where">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="will">
+		<file name="textbook.txt">1</file>
+	</word>
+	<word text="with">
+		<file name="textbook.txt">4</file>
+	</word>
+	<word text="work">
+		<file name="textbook.txt">3</file>
+	</word>
+</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST NINE: One directory with 2 directories (each with 3 files named the same with similar words), and one more file in the main directory. 
+
+E.g. ./TestCases/Test9/... 
+	|->startdir
+	    |->TestDir1
+		|->file1
+		|->file2
+		|->file3
+	    |->TestDir2
+		|->file1
+		|->file2
+		|->file3
+	    |->testfile
+
+command line input ->./invertedIndex index ./TestCases/Test9
+
+file data:  
+	
+./startdir/testDir1/file1.txt:		Where is your cat?
+./startdir/testDir1/file2.txt:		Where is your dog?	
+./startdir/testDir1/file3.txt:		Where is your fish?
+./startdir/testDir2/file1.txt:		I am a cat.
+./startdir/testDir2/file2.txt:		I am a dog.
+./startdir/testDir2/file3.txt:		I am a fish.
+./startdir/testfile.txt:		Here is a file.
+
+Expected Output: 
+	Command Line: 4 directories, 7 files, and 28 words indexed.  Output can be found at ./index.
+	XML File: 
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+	        <word text="a">
+	                <file name="file1">1</file>
+	                <file name="file2">1</file>
+	                <file name="file3">1</file>
+	                <file name="testfile">1</file>
+	        </word>
+	        <word text="am">
+	                <file name="file1">1</file>
+	                <file name="file2">1</file>
+	                <file name="file3">1</file>
+	        </word>
+	        <word text="cat">
+	                <file name="file1">2</file>
+	        </word>
+	        <word text="dog">
+	                <file name="file2">2</file>
+	        </word>
+	        <word text="file">
+	                <file name="testfile">1</file>
+	        </word>
+	        <word text="fish">
+	                <file name="file3">2</file>
+	        </word>
+	        <word text="here">
+	                <file name="testfile">1</file>
+	        </word>
+		<word text="is">
+        	        <file name="file1">1</file>
+        	        <file name="file2">1</file>
+        	        <file name="file3">1</file>
+        	        <file name="testfile">1</file>
+	      	</word>
+	        <word text="where">
+	                <file name="file1">1</file>
+	                <file name="file2">1</file>
+	                <file name="file3">1</file>
+	        </word>
+	        <word text="your">
+	                <file name="file1">1</file>
+	                <file name="file2">1</file>
+	                <file name="file3">1</file>
+	        </word>
+	</fileIndex>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+TEST TEN: A directory with 4 more directories.  Each directory holds an identically named file with different words.  Plus one extra file in main directory.
+
+ E.g. ./TestCases/Test10/... 
+	|->Test10
+	    |->Files.txt
+	    |->T10.txt
+	    |->Test1
+		|->T10.txt
+	    |->Test2
+		|->T10.txt
+	    |->Test3
+		|->T10.txt
+	    |->Test4
+		|->T10.txt
+
+command line input ->./invertedIndex index ./TestCases/Test10
+
+file data:  
+	
+./Test10/Files.txt:		alpha%beta^W#324charlie///.delta
+./Test10/T10.txt:		<null>
+./Test10/Test1/T10.txt:		beta**&charlie12344delta()()echo
+./Test10/Test2/T10.txt:		charlie{134[delta+echo
+./Test10/Test3/T10.txt:		delta***echo
+./Test10/Test4/T10.txt:		2039480329480123984012384-312483420983-49281-08echo
+
+
+
+Expected Output: 
+	Command Line: 5 directories, 6 files, and 14 words indexed.  Output can be found at ./index.
+	XML File: 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<fileIndex>
+	        <word text="alpha">
+	                <file name="files.txt">1</file>
+	        </word>
+	        <word text="beta">
+	                <file name="files.txt">1</file>
+	                <file name="t10.txt">1</file>
+	        </word>
+	        <word text="charlie">
+	                <file name="files.txt">1</file>
+	                <file name="t10.txt">1</file>
+	        </word>
+	        <word text="charlie12344delta">
+	                <file name="t10.txt">1</file>
+	        </word>
+	        <word text="delta">
+	                <file name="t10.txt">2</file>
+	                <file name="files.txt">1</file>
+	        </word>
+	        <word text="echo">
+	                <file name="t10.txt">4</file>
+	        </word>
+	        <word text="w">
+	                <file name="files.txt">1</file>
+	        </word>
+	</fileIndex>
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+	It should also be noted that we ran all of these testcases back to back to test the durability of the code.
+
+
+	(e.g. command line prompt ./invertedIndex index ./TestCases)
+
+
+	The expected output was a combination of all of the above cases (and appeared to work).	
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
